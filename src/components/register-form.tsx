@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
 import {
     Form,
     FormControl,
     FormField,
     FormItem,
+    FormLabel,
     FormMessage,
 } from "@/components/ui/form";
 import { registerFormSchema, RegisterSchema } from '@/schemas/register-schema';
@@ -52,12 +52,13 @@ export default function RegisterForm() {
             <div className="text-lg font-semibold mb-8 text-center">Sign Up</div>
 
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col justify-center items-center">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 flex flex-col justify-center items-center">
                     <FormField
                         control={form.control}
                         name="firstName"
                         render={({ field }) => (
                             <FormItem className="w-full">
+                                <FormLabel>First Name</FormLabel>
                                 <FormControl>
                                     <Input placeholder="First Name" {...field} />
                                 </FormControl>
@@ -70,6 +71,7 @@ export default function RegisterForm() {
                         name="lastName"
                         render={({ field }) => (
                             <FormItem className="w-full">
+                                <FormLabel>Last Name</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Last Name" {...field} />
                                 </FormControl>
@@ -82,6 +84,7 @@ export default function RegisterForm() {
                         name="username"
                         render={({ field }) => (
                             <FormItem className="w-full">
+                                <FormLabel>Username</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Username" {...field} />
                                 </FormControl>
@@ -94,6 +97,7 @@ export default function RegisterForm() {
                         name="password"
                         render={({ field }) => (
                             <FormItem className="w-full">
+                                <FormLabel>Password</FormLabel>
                                 <FormControl>
                                     <Input type="password" placeholder="Password" {...field} />
                                 </FormControl>
@@ -106,6 +110,7 @@ export default function RegisterForm() {
                         name="confirmPassword"
                         render={({ field }) => (
                             <FormItem className="w-full">
+                                <FormLabel>Confirm Password</FormLabel>
                                 <FormControl>
                                     <Input type="password" placeholder="Confirm Password" {...field} />
                                 </FormControl>

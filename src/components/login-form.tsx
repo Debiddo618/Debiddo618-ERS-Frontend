@@ -3,6 +3,7 @@ import {
     FormControl,
     FormField,
     FormItem,
+    FormLabel,
     FormMessage,
 } from "@/components/ui/form";
 import { useForm } from 'react-hook-form';
@@ -44,12 +45,13 @@ export default function LoginForm() {
         <div className="w-4/12 p-5 rounded-md shadow-md">
             <div className="text-lg font-semibold mb-8 text-center">Login</div>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col justify-center items-center">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 flex flex-col justify-center items-center">
                     <FormField
                         control={form.control}
                         name="username"
                         render={({ field }) => (
                             <FormItem className="w-full">
+                                <FormLabel>Username</FormLabel>
                                 <FormControl>
                                     <Input type="text" placeholder="Username" {...field} />
                                 </FormControl>
@@ -62,6 +64,7 @@ export default function LoginForm() {
                         name="password"
                         render={({ field }) => (
                             <FormItem className="w-full">
+                                <FormLabel>Password</FormLabel>
                                 <FormControl>
                                     <Input type="password" placeholder="Password" {...field} />
                                 </FormControl>
