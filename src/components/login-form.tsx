@@ -42,7 +42,7 @@ export default function LoginForm() {
 
 
     return (
-        <div className="w-4/12 p-5 rounded-md shadow-md">
+        <div className="w-96 p-5 rounded-md shadow-md">
             <div className="text-lg font-semibold mb-8 text-center">Login</div>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 flex flex-col justify-center items-center">

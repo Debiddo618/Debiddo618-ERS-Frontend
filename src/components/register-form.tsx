@@ -48,7 +48,7 @@ export default function RegisterForm() {
 
     return (
         // pass in all the properties and method of form
-        <div className="w-4/12 p-5 rounded-md shadow-md">
+        <div className="w-96 p-5 rounded-md shadow-md">
             <div className="text-lg font-semibold mb-8 text-center">Sign Up</div>
 
             <Form {...form}>
