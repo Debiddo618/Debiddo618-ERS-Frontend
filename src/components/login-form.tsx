@@ -32,10 +32,8 @@ export default function LoginForm() {
 
     // Define the onSubmit function
     const onSubmit = (data: LoginSchema) => {
-
         try {
             login(data);
-            console.log("Login successful", data);
         } catch (error) {
             console.error("Login failed:", error);
         }
@@ -45,37 +43,37 @@ export default function LoginForm() {
 
     return (
         <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input type="text" placeholder="Username" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-  
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input type="password" placeholder="Password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-  
-          <Button type="submit" disabled={isPending}>
-            Login
-          </Button>
-        </form>
-      </Form>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <FormField
+                    control={form.control}
+                    name="username"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <Input type="text" placeholder="Username" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <Input type="password" placeholder="Password" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <Button type="submit" disabled={isPending}>
+                    Login
+                </Button>
+            </form>
+        </Form>
     )
 }
