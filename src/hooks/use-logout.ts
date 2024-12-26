@@ -17,22 +17,3 @@ export function useLogout() {
 
   return logout;
 }
-// const queryClient = useQueryClient();
-
-// return useMutation({
-//   mutationFn: async () => {
-//     const resp = await axiosInstance.post("/auth/logout");
-//     return resp.data;
-//     localStorage.removeItem('token');
-
-//   },
-//   onSuccess: () => {
-//     toast.success("Logged out successfully");
-//     queryClient.invalidateQueries({
-//       queryKey: ["auth"],
-//     });
-//   },
-//   onError: () => {
-//     toast.error("Failed to log out");
-//   },
-// });

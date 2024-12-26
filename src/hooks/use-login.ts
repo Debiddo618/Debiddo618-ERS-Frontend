@@ -7,10 +7,8 @@ import { useToast } from "./use-toast";
 
 
 export function useLogin() {
-    //   const queryClient = useQueryClient();
     const router = useRouter();
     const { toast } = useToast()
-
 
     return useMutation({
         mutationFn: async (values: LoginSchema) => {
@@ -18,10 +16,6 @@ export function useLogin() {
             return resp.data.token;
         },
         onSuccess: (token) => {
-            //   queryClient.invalidateQueries({
-            //     queryKey: ["auth"],
-            //   });
-            // console.log("login Success" + token)
             localStorage.setItem('token', token);
             toast({
                 title: "Login Successfully",
