@@ -1,6 +1,7 @@
 import { User, getUser } from '@/lib/authUtils';
 import { Link } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
+import { UserDropdown } from './user-dropdown';
 
 export default function Navbar() {
     const [user, setUser] = useState<User | null>(null);
@@ -10,19 +11,13 @@ export default function Navbar() {
     }, []);
 
     return (
-        <div className="p-2 flex gap-2">
-            <Link to="/" className="[&.active]:font-bold">
-                Home
+        <div className="p-2 flex items-center gap-2 justify-around shadow-md">
+            <Link to="/dashboard" className="[&.active]:font-bold">
+                ERS
             </Link>
-            <Link to="/about" className="[&.active]:font-bold">
-                About
-            </Link>
-            <Link to="/login" className="[&.active]:font-bold">
-                Login
-            </Link>
-            <Link to="/register" className="[&.active]:font-bold">
-                Register
-            </Link>
+            <div className="">
+                <UserDropdown />
+            </div>
         </div>
     );
 }

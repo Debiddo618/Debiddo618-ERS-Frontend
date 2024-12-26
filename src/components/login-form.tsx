@@ -39,8 +39,6 @@ export default function LoginForm() {
         }
     };
 
-
-
     return (
         <div className="w-96 p-5 rounded-md shadow-md">
             <div className="text-lg font-semibold mb-8 text-center">Login</div>

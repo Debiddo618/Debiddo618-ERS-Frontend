@@ -21,7 +21,7 @@ export function useLogin() {
             //   queryClient.invalidateQueries({
             //     queryKey: ["auth"],
             //   });
-            console.log("login Success" + token)
+            // console.log("login Success" + token)
             localStorage.setItem('token', token);
             toast({
                 title: "Login Successfully",
