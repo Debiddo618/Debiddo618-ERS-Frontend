@@ -18,8 +18,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { useDeleteReimbursement } from "@/hooks/use-deleteReimbursement"
 
 interface Reimbursement {
+    id:number,
     title: string,
     amount: number,
     status: "pending" | "approved" | "rejected",
@@ -27,7 +29,9 @@ interface Reimbursement {
     showDelete: boolean | null
 }
 
-const Reimbursement: React.FC<Reimbursement> = ({ title, amount, status, showEdit, showDelete }) => {
+const Reimbursement: React.FC<Reimbursement> = ({id, title, amount, status, showEdit, showDelete }) => {
+    const { mutate: deleteById, isPending } = useDeleteReimbursement();
+    
     return (
         <Card className="w-[350px] mb-5 shadow-md">
             <CardHeader>
@@ -37,7 +41,7 @@ const Reimbursement: React.FC<Reimbursement> = ({ title, amount, status, showEdi
             </CardHeader>
             <CardFooter className={`flex ${(!showEdit || !showDelete) ? 'justify-center' : 'justify-between'}`}>
                 {showEdit && <Button variant="outline">Edit</Button>}
-                {showDelete && <Button>Delete</Button>}
+                {showDelete && <Button onClick={()=> deleteById(id)}>Delete</Button>}
             </CardFooter>
         </Card>
     )

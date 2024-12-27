@@ -52,7 +52,7 @@ function RouteComponent() {
         <h1 className='mb-3 text-center font-semibold'>PENDING</h1>
         {pendingReimbursements.map((reimbursement: Reimbursements) => (
           <div key={reimbursement.reimbId}>
-            <Reimbursement title={reimbursement.description} amount={reimbursement.amount} status={reimbursement.status} showDelete={true} showEdit={true} />
+            <Reimbursement title={reimbursement.description} id={reimbursement.reimbId} amount={reimbursement.amount} status={reimbursement.status} showDelete={true} showEdit={true} />
           </div>
         ))}
       </div>
@@ -60,7 +60,7 @@ function RouteComponent() {
         <h1 className='mb-3 text-center font-semibold'>APPROVED</h1>
         {approvedReimbursements.map((reimbursement: Reimbursements) => (
           <div key={reimbursement.reimbId}>
-            <Reimbursement title={reimbursement.description} amount={reimbursement.amount} status={reimbursement.status} showDelete={true} showEdit={false} />
+            <Reimbursement title={reimbursement.description} id={reimbursement.reimbId} amount={reimbursement.amount} status={reimbursement.status} showDelete={true} showEdit={false} />
           </div>
         ))}
       </div>
@@ -68,7 +68,7 @@ function RouteComponent() {
         <h1 className='mb-3 text-center font-semibold'>REJECTED</h1>
         {rejectedReimbursements.map((reimbursement: Reimbursements) => (
           <div key={reimbursement.reimbId}>
-            <Reimbursement title={reimbursement.description} amount={reimbursement.amount} status={reimbursement.status} showDelete={true} showEdit={false} />
+            <Reimbursement title={reimbursement.description} id={reimbursement.reimbId} amount={reimbursement.amount} status={reimbursement.status} showDelete={true} showEdit={false} />
           </div>
         ))}
       </div>
