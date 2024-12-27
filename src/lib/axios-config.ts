@@ -9,9 +9,10 @@ const axiosInstance = axios.create({
 
 // Interceptor to attach JWT to request headers
 axiosInstance.interceptors.request.use((config) => {
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem('token');
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
+        console.log("Inside axios: " + token)
     }
     return config;
 });
