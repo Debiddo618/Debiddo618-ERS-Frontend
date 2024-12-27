@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import Reimbursement from '@/components/Reimbursement';
 import ReimbursementEditForm from '@/components/Reimbursement-editform';
-import { ShowFormContext } from '../_protected';
 
 export const Route = createLazyFileRoute('/_protected/dashboard')({
   component: RouteComponent,
@@ -20,7 +19,6 @@ type Reimbursements = {
 
 function RouteComponent() {
   const [user, setUser] = useState<User | null>(null);
-  const showForm = useContext(ShowFormContext);
   const [selected, setSelected] = useState<Reimbursements | null>(null);
 
   useEffect(() => {
@@ -48,9 +46,9 @@ function RouteComponent() {
   const rejectedReimbursements = data?.filter((reimbursement: Reimbursements) => reimbursement.status === 'rejected') || [];
 
   return (
-    <div className='flex justify-around p-4'>
-      <div className="w-50 h-full">
-        <h1 className='mb-3 text-center font-semibold'>PENDING</h1>
+    <div className='flex justify-evenly p-4 w-screen backdrop-blur-lg bg-white/30'>
+      <div className="w-50 h-screen rounded-md p-3 bg-zinc-50 shadow-md">
+        <h1 className='mb-3 text-center font-semibold w-[350px]'>PENDING</h1>
         {pendingReimbursements.map((reimbursement: Reimbursements) => (
           <div key={reimbursement.reimbId}>
             <Reimbursement
@@ -65,8 +63,8 @@ function RouteComponent() {
           </div>
         ))}
       </div>
-      <div className="w-50 h-full">
-        <h1 className='mb-3 text-center font-semibold'>APPROVED</h1>
+      <div className="w-50 h-screen rounded-md p-3 bg-zinc-50 shadow-md">
+        <h1 className='mb-3 text-center font-semibold w-[350px]'>APPROVED</h1>
         {approvedReimbursements.map((reimbursement: Reimbursements) => (
           <div key={reimbursement.reimbId}>
             <Reimbursement
@@ -81,8 +79,8 @@ function RouteComponent() {
           </div>
         ))}
       </div>
-      <div className="w-50 h-full">
-        <h1 className='mb-3 text-center font-semibold'>REJECTED</h1>
+      <div className="w-50 h-screen rounded-md p-3 bg-zinc-50 shadow-md">
+        <h1 className='mb-3 text-center font-semibold w-[350px]'>REJECTED</h1>
         {rejectedReimbursements.map((reimbursement: Reimbursements) => (
           <div key={reimbursement.reimbId}>
             <Reimbursement
