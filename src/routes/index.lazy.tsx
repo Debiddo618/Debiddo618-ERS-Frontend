@@ -1,5 +1,3 @@
-import Reimbursement from '@/components/Reimbursement'
-import ReimbursementForm from '@/components/Reimbursement-form'
 import { createLazyFileRoute, Link } from '@tanstack/react-router'
 
 export const Route = createLazyFileRoute('/')({
@@ -16,7 +14,6 @@ function Index() {
             <Link to="/register" className="[&.active]:font-bold">
                 Register
             </Link>
-            <ReimbursementForm/>
         </div>
     )
 } 
