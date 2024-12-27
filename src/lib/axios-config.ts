@@ -1,4 +1,6 @@
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+
 
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -7,12 +9,39 @@ const axiosInstance = axios.create({
     }
 })
 
+const isTokenExpired = (token: string): boolean => {
+    try {
+        const decoded = jwtDecode(token);
+        const currentTime = Date.now() / 1000;
+
+        if (decoded.exp === undefined) {
+            // console.error("Token does not have an expiration time.");
+            return true;
+        }
+
+        return decoded.exp < currentTime;
+    } catch (error) {
+        // console.error("Error decoding JWT:", error);
+        return true;
+    }
+};
+
 // Interceptor to attach JWT to request headers
 axiosInstance.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
+    // console.log("Inside axios")
+
     if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        if (isTokenExpired(token)) {
+            // console.log("Token Expired")
+            localStorage.removeItem('token');
+            window.location.href = "/";
+        } else {
+            // console.log("Token have not expire")
+            config.headers.Authorization = `Bearer ${token}`;
+        }
     }
+
     return config;
 });
 
