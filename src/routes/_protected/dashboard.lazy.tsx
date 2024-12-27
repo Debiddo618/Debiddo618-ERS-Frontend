@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import Reimbursement from '@/components/Reimbursement';
 import ReimbursementEditForm from '@/components/Reimbursement-editform';
+import ReimbursementList from '@/components/Reimbursement-list';
 
 export const Route = createLazyFileRoute('/_protected/dashboard')({
   component: RouteComponent,
@@ -47,54 +48,11 @@ function RouteComponent() {
 
   return (
     <div className='flex justify-evenly p-4 w-screen backdrop-blur-lg bg-white/30'>
-      <div className="w-50 h-screen rounded-md p-3 bg-zinc-50 shadow-md">
-        <h1 className='mb-3 text-center font-semibold w-[350px]'>PENDING</h1>
-        {pendingReimbursements.map((reimbursement: Reimbursements) => (
-          <div key={reimbursement.reimbId}>
-            <Reimbursement
-              description={reimbursement.description}
-              id={reimbursement.reimbId}
-              amount={reimbursement.amount}
-              status={reimbursement.status}
-              showDelete={true}
-              showEdit={true}
-              selected={setSelected}
-            />
-          </div>
-        ))}
-      </div>
-      <div className="w-50 h-screen rounded-md p-3 bg-zinc-50 shadow-md">
-        <h1 className='mb-3 text-center font-semibold w-[350px]'>APPROVED</h1>
-        {approvedReimbursements.map((reimbursement: Reimbursements) => (
-          <div key={reimbursement.reimbId}>
-            <Reimbursement
-              description={reimbursement.description}
-              id={reimbursement.reimbId}
-              amount={reimbursement.amount}
-              status={reimbursement.status}
-              showDelete={true}
-              showEdit={false}
-              selected={setSelected}
-            />
-          </div>
-        ))}
-      </div>
-      <div className="w-50 h-screen rounded-md p-3 bg-zinc-50 shadow-md">
-        <h1 className='mb-3 text-center font-semibold w-[350px]'>REJECTED</h1>
-        {rejectedReimbursements.map((reimbursement: Reimbursements) => (
-          <div key={reimbursement.reimbId}>
-            <Reimbursement
-              description={reimbursement.description}
-              id={reimbursement.reimbId}
-              amount={reimbursement.amount}
-              status={reimbursement.status}
-              showDelete={true}
-              showEdit={false}
-              selected={setSelected}
-            />
-          </div>
-        ))}
-      </div>
+      <ReimbursementList list={pendingReimbursements} setSelected={setSelected} status={"PENDING"}/>
+
+      <ReimbursementList list={approvedReimbursements} setSelected={setSelected} status={"APPROVED"}/>
+
+      <ReimbursementList list={rejectedReimbursements} setSelected={setSelected} status={"REJECTED"}/>
 
       {selected && <ReimbursementEditForm selected={selected} setSelected={setSelected} />}
     </div>
