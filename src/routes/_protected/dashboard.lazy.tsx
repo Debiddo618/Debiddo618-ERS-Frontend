@@ -3,7 +3,9 @@ import { getUser, User } from '@/lib/authUtils'
 import axiosInstance from '@/lib/axios-config';
 import { useQuery } from '@tanstack/react-query';
 import { createLazyFileRoute } from '@tanstack/react-router'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { ShowFormContext } from '../_protected';
+import ReimbursementForm from '@/components/Reimbursement-form';
 
 export const Route = createLazyFileRoute('/_protected/dashboard')({
   component: RouteComponent,
@@ -18,6 +20,7 @@ type Reimbursements = {
 
 function RouteComponent() {
   const [user, setUser] = useState<User | null>(null);
+  const showForm = useContext(ShowFormContext);
 
   useEffect(() => {
     const currentUser = getUser();
