@@ -6,47 +6,61 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useCreateReimbursement } from "@/hooks/use-createReimbursement";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { reimbursementFormSchema, ReimbursementSchema } from "@/schemas/reimbursement-schema";
+import { useUpdateReimbursement } from "@/hooks/use-updateReimbursement";
 
-interface ReimbursementFormProps {
-    showForm: boolean;
-    setShowForm: (show: boolean) => void;
+interface ReimbursementEditFormProps {
+    selected: { reimbId: number, description: string, amount: number } | null,
+    setSelected: any
 }
 
-export default function ReimbursementForm({ showForm, setShowForm }: ReimbursementFormProps) {
-    const { mutate: create, isPending } = useCreateReimbursement();
+export default function ReimbursementEditForm({ selected, setSelected }: ReimbursementEditFormProps) {
+    const { mutate: update, isPending } = useUpdateReimbursement();
 
-    // Define your form
+    // Initialize the form with default values if selected is provided
     const form = useForm<ReimbursementSchema>({
         resolver: zodResolver(reimbursementFormSchema),
-        defaultValues: {
-            description: "",
-            amount: 0,
-        },
+        defaultValues: selected
+            ? {
+                description: selected.description,
+                amount: selected.amount,
+            }
+            : {
+                description: "",
+                amount: 0,
+            },
     });
+
+    useEffect(() => {
+        if (selected) {
+            form.reset({
+                description: selected.description,
+                amount: selected.amount,
+            });
+        }
+    }, [selected, form]);
 
     // Define the onSubmit function
     const onSubmit = (data: ReimbursementSchema) => {
-        try {
-            create(data);
-            setShowForm(false);
-        } catch (error) {
-            console.error("Reimbursement creation failed:", error);
+        if (selected) {
+            try {
+                update({ id: selected.reimbId, values: data });
+                setSelected(null);
+            } catch (error) {
+                console.error("Reimbursement update failed:", error);
+            }
         }
     };
-
-    if (!showForm) return null;
 
     return (
         <div className="absolute w-full h-full flex justify-center items-center bg-white z-20 top-0">
             <div className="w-96 p-5 rounded-md shadow-md">
-                <div className="text-lg font-semibold mb-8 text-center">New Reimbursement</div>
+                <div className="text-lg font-semibold mb-8 text-center">Edit Reimbursement</div>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 flex flex-col justify-center items-center">
                         <FormField
@@ -76,11 +90,11 @@ export default function ReimbursementForm({ showForm, setShowForm }: Reimburseme
                             )}
                         />
                         <div className="flex justify-evenly w-full">
-                            <Button type="button" onClick={() => setShowForm(false)} disabled={isPending} className="w-1/3" variant={"outline"}>
+                            <Button type="button" onClick={() => setSelected(null)} disabled={isPending} className="w-1/3" variant={"outline"}>
                                 Cancel
                             </Button>
                             <Button type="submit" disabled={isPending} className="w-1/3">
-                                Create
+                                Update
                             </Button>
                         </div>
                     </form>

@@ -1,15 +1,15 @@
-import Reimbursement from '@/components/Reimbursement';
-import { getUser, User } from '@/lib/authUtils'
+import { useContext, useEffect, useState } from 'react';
+import { getUser, User } from '@/lib/authUtils';
 import axiosInstance from '@/lib/axios-config';
 import { useQuery } from '@tanstack/react-query';
-import { createLazyFileRoute } from '@tanstack/react-router'
-import { useContext, useEffect, useState } from 'react'
+import { createLazyFileRoute } from '@tanstack/react-router';
+import Reimbursement from '@/components/Reimbursement';
+import ReimbursementEditForm from '@/components/Reimbursement-editform';
 import { ShowFormContext } from '../_protected';
-import ReimbursementForm from '@/components/Reimbursement-form';
 
 export const Route = createLazyFileRoute('/_protected/dashboard')({
   component: RouteComponent,
-})
+});
 
 type Reimbursements = {
   reimbId: number;
@@ -21,6 +21,7 @@ type Reimbursements = {
 function RouteComponent() {
   const [user, setUser] = useState<User | null>(null);
   const showForm = useContext(ShowFormContext);
+  const [selected, setSelected] = useState<Reimbursements | null>(null);
 
   useEffect(() => {
     const currentUser = getUser();
@@ -52,7 +53,15 @@ function RouteComponent() {
         <h1 className='mb-3 text-center font-semibold'>PENDING</h1>
         {pendingReimbursements.map((reimbursement: Reimbursements) => (
           <div key={reimbursement.reimbId}>
-            <Reimbursement title={reimbursement.description} id={reimbursement.reimbId} amount={reimbursement.amount} status={reimbursement.status} showDelete={true} showEdit={true} />
+            <Reimbursement
+              description={reimbursement.description}
+              id={reimbursement.reimbId}
+              amount={reimbursement.amount}
+              status={reimbursement.status}
+              showDelete={true}
+              showEdit={true}
+              selected={setSelected}
+            />
           </div>
         ))}
       </div>
@@ -60,7 +69,15 @@ function RouteComponent() {
         <h1 className='mb-3 text-center font-semibold'>APPROVED</h1>
         {approvedReimbursements.map((reimbursement: Reimbursements) => (
           <div key={reimbursement.reimbId}>
-            <Reimbursement title={reimbursement.description} id={reimbursement.reimbId} amount={reimbursement.amount} status={reimbursement.status} showDelete={true} showEdit={false} />
+            <Reimbursement
+              description={reimbursement.description}
+              id={reimbursement.reimbId}
+              amount={reimbursement.amount}
+              status={reimbursement.status}
+              showDelete={true}
+              showEdit={false}
+              selected={setSelected}
+            />
           </div>
         ))}
       </div>
@@ -68,10 +85,20 @@ function RouteComponent() {
         <h1 className='mb-3 text-center font-semibold'>REJECTED</h1>
         {rejectedReimbursements.map((reimbursement: Reimbursements) => (
           <div key={reimbursement.reimbId}>
-            <Reimbursement title={reimbursement.description} id={reimbursement.reimbId} amount={reimbursement.amount} status={reimbursement.status} showDelete={true} showEdit={false} />
+            <Reimbursement
+              description={reimbursement.description}
+              id={reimbursement.reimbId}
+              amount={reimbursement.amount}
+              status={reimbursement.status}
+              showDelete={true}
+              showEdit={false}
+              selected={setSelected}
+            />
           </div>
         ))}
       </div>
+
+      {selected && <ReimbursementEditForm selected={selected} setSelected={setSelected} />}
     </div>
   );
 }
