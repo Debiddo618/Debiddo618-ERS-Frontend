@@ -18,7 +18,7 @@ export function useDeleteReimbursement() {
                 title: "Reimbursement deleted successfully",
             })
             queryClient.invalidateQueries({
-                queryKey: ["reimb"]
+                queryKey: ["reimbursements"]
             })
 
             // router.navigate({ to: "/dashboard" });

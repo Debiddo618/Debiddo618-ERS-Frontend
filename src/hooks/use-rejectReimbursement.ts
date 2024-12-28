@@ -16,7 +16,10 @@ export function useRejectReimbursement() {
                 title: "Reimbursement rejected successfully",
             });
             queryClient.invalidateQueries({
-                queryKey: ['allReimb', 'reimb']
+                queryKey: ["allReimb"]
+            });            
+            queryClient.invalidateQueries({
+                queryKey: ["reimbursements"]
             });            
         },
         onError: () => {

@@ -18,8 +18,11 @@ export function useUpdateReimbursement() {
                 title: "Reimbursement updated successfully",
             });
             queryClient.invalidateQueries({
-                queryKey: ["reimb"]
-            });
+                queryKey: ["allReimb"]
+            });            
+            queryClient.invalidateQueries({
+                queryKey: ["reimbursements"]
+            }); 
         },
         onError: () => {
             toast({

@@ -16,8 +16,11 @@ export function useApproveReimbursement() {
                 title: "Reimbursement approved successfully",
             });
             queryClient.invalidateQueries({
-                queryKey: ['allReimb', 'reimb']
+                queryKey: ["allReimb"]
             });            
+            queryClient.invalidateQueries({
+                queryKey: ["reimbursements"]
+            });             
         },
         onError: () => {
             toast({

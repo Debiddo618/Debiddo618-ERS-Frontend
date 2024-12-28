@@ -7,7 +7,7 @@ export function usePendReimbursement() {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: async (id:number) => {
+        mutationFn: async (id: number) => {
             const resp = await axiosInstance.post(`/api/reimbursements/pend/${id}`);
             return resp.data;
         },
@@ -16,8 +16,11 @@ export function usePendReimbursement() {
                 title: "Reset reimbursement to pending successfully",
             });
             queryClient.invalidateQueries({
-                queryKey: ['allReimb', 'reimb']
-            });            
+                queryKey: ["allReimb"]
+            });
+            queryClient.invalidateQueries({
+                queryKey: ["reimbursements"]
+            });
         },
         onError: () => {
             toast({
