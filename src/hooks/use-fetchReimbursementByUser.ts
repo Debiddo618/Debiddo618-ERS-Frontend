@@ -11,7 +11,7 @@ export function useFetchReimbursementByUser(id: any, user: any) {
                 const resp = await axiosInstance.get(`/api/reimbursements/user/${user.userId}`);
                 return resp.data;
             } catch (e) {
-                console.error(e);
+                console.log(e);
                 return null;
             }
         },
