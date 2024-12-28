@@ -25,7 +25,6 @@ type User = {
     firstName: string,
     lastName: string,
     username: string,
-    password: string,
     role: "EMPLOYEE" | "MANAGER",
     reimbursements: Reimbursements[]
 }

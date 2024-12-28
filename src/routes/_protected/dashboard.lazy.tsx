@@ -23,7 +23,6 @@ function RouteComponent() {
   const [selected, setSelected] = useState<Reimbursements | null>(null);
   const show = useContext(ShowFormContext);
 
-
   useEffect(() => {
     const currentUser = getUser();
     setUser(currentUser);
@@ -32,27 +31,29 @@ function RouteComponent() {
   const { data: role } = useFetchRole(user?.userId);
 
   return (
-    <div className="">
+    <div>
       {(!selected && !show) && (
-        <div className="">
-          {role === "MANAGER" ? <ReimbursementTable /> : null}
-          <div className='flex justify-evenly p-4 w-screen backdrop-blur-lg bg-white/30'>
-            <ReimbursementList
-              setSelected={setSelected}
-              status={"pending"}
-              user={user}
-            />
-            <ReimbursementList
-              setSelected={setSelected}
-              status={"approved"}
-              user={user}
-            />
-            <ReimbursementList
-              setSelected={setSelected}
-              status={"rejected"}
-              user={user}
-            />
-          </div>
+        <div>
+          {role === "MANAGER" && <ReimbursementTable />}
+          {role === "EMPLOYEE" && (
+            <div className='flex justify-evenly p-4 w-screen backdrop-blur-lg bg-white/30'>
+              <ReimbursementList
+                setSelected={setSelected}
+                status={"pending"}
+                user={user}
+              />
+              <ReimbursementList
+                setSelected={setSelected}
+                status={"approved"}
+                user={user}
+              />
+              <ReimbursementList
+                setSelected={setSelected}
+                status={"rejected"}
+                user={user}
+              />
+            </div>
+          )}
         </div>
       )}
       {selected && (

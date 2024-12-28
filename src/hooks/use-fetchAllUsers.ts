@@ -8,7 +8,14 @@ export function useFetchAllUsers() {
         queryFn: async () => {
             try {
                 const resp = await axiosInstance.get(`/api/users`);
-                return resp.data;
+                const users = resp.data;
+
+                const usersWithoutPassword = users.map((user: any) => {
+                    const { password, ...userWithoutPassword } = user;
+                    return userWithoutPassword;
+                });
+
+                return usersWithoutPassword;
             } catch (e) {
                 console.error(e);
                 return null;
