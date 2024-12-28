@@ -4,7 +4,7 @@ import axiosInstance from "@/lib/axios-config";
 
 export function useFetchAllReimbursement() {
     return useQuery({
-        queryKey: ['allReimb'],
+        queryKey: ["allReimb"],
         queryFn: async () => {
             try {
                 const resp = await axiosInstance.get(`/api/reimbursements`);
