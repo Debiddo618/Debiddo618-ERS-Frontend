@@ -50,7 +50,7 @@ export function ReimbursementTable() {
     };
 
     return (
-        <div className="my-4 w-full px-52 mx-auto">
+        <div className="my-4 w-full px-36 mx-auto">
             {userData && (
                 <Table className="w-full">
                     <TableCaption>A list of all reimbursements</TableCaption>
@@ -68,7 +68,7 @@ export function ReimbursementTable() {
                     </TableHeader>
                     <TableBody>
                         {userData.map((user: User) => {
-                            return user.reimbursements.map((reimbursement: Reimbursements) => (
+                            return user.reimbursements.sort((a, b) => a.reimbId - b.reimbId).map((reimbursement: Reimbursements) => (
                                 <TableRow key={reimbursement.reimbId}>
                                     <TableCell className="font-medium">{reimbursement.reimbId}</TableCell>
                                     <TableCell>{user.username}</TableCell>
