@@ -54,7 +54,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
         <div className="my-4 w-full px-36 mx-auto">
             {userData && (
                 <Table className="w-full">
-                    <TableCaption>A list of all reimbursements</TableCaption>
+                    <TableCaption>A list of all Reimbursements</TableCaption>
                     <TableHeader>
                         <TableRow>
                             <TableHead>ReimbId</TableHead>
