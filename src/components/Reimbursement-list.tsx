@@ -22,10 +22,6 @@ export default function ReimbursementList({ setSelected, status, user }: Reimbur
 
     const reimbursements = data?.filter((reimbursement: Reimbursements) => reimbursement.status === status) || [];
 
-    useEffect(()=>{
-        setReimb(data);
-    },[reimb,data])
-
     return (
         <div className="w-50 h-screen rounded-md p-3 bg-zinc-50 shadow-md">
             <h1 className='mb-3 text-center font-semibold w-[350px]'>{status.toUpperCase()}</h1>
@@ -37,7 +33,7 @@ export default function ReimbursementList({ setSelected, status, user }: Reimbur
                         amount={reimbursement.amount}
                         status={reimbursement.status}
                         showDelete={true}
-                        showEdit={status === "PENDING" ? true : false}
+                        showEdit={status === "pending" ? true : false}
                         selected={setSelected}
                     />
                 </div>
