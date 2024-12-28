@@ -36,6 +36,7 @@ export default function ReimbursementForm({ showForm, setShowForm }: Reimburseme
         try {
             create(data);
             setShowForm(false);
+            form.reset();
         } catch (error) {
             console.error("Reimbursement creation failed:", error);
         }
