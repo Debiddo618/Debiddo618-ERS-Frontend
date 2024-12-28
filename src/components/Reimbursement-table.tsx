@@ -29,9 +29,11 @@ type User = {
     reimbursements: Reimbursements[]
 }
 
-export function ReimbursementTable() {
-    const { data: userData } = useFetchAllUsers();
+type ReimbursementTableProps = {
+    userData: User[];
+};
 
+export function ReimbursementTable({ userData }: ReimbursementTableProps) {
     const { mutate: approve, isApprovePending } = useApproveReimbursement();
     const { mutate: reject, isRejectPending } = useRejectReimbursement();
     const { mutate: pend, isPendPending } = usePendReimbursement();

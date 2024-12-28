@@ -6,6 +6,8 @@ import ReimbursementList from '@/components/Reimbursement-list';
 import { useFetchRole } from '@/hooks/use-fetchRole';
 import { ReimbursementTable } from '@/components/Reimbursement-table';
 import { ShowFormContext } from '../_protected';
+import { useFetchAllUsers } from '@/hooks/use-fetchAllUsers';
+import ManagerDashboard from '@/components/Manager-Dashboard';
 
 export const Route = createLazyFileRoute('/_protected/dashboard')({
   component: RouteComponent,
@@ -21,7 +23,7 @@ type Reimbursements = {
 function RouteComponent() {
   const [user, setUser] = useState<User | null>(null);
   const [selected, setSelected] = useState<Reimbursements | null>(null);
-  const show = useContext(ShowFormContext);
+  const show = useContext(ShowFormContext);  
 
   useEffect(() => {
     const currentUser = getUser();
@@ -34,7 +36,7 @@ function RouteComponent() {
     <div>
       {(!selected && !show) && (
         <div>
-          {role === "MANAGER" && <ReimbursementTable />}
+          {role === "MANAGER" && <ManagerDashboard />}
           {role === "EMPLOYEE" && (
             <div className='flex justify-evenly p-4 w-screen backdrop-blur-lg bg-white/30'>
               <ReimbursementList
