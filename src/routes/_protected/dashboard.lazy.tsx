@@ -40,31 +40,34 @@ function RouteComponent() {
 
   return (
     <div className="">
-      {role === "MANAGER" ? <ReimbursementTable /> : null}
-
-      <div className='flex justify-evenly p-4 w-screen backdrop-blur-lg bg-white/30'>
-        <ReimbursementList
-          list={pendingReimbursements}
+      {!selected && (
+        <div className="">
+          {role === "MANAGER" ? <ReimbursementTable /> : null}
+          <div className='flex justify-evenly p-4 w-screen backdrop-blur-lg bg-white/30'>
+            <ReimbursementList
+              list={pendingReimbursements}
+              setSelected={setSelected}
+              status={"PENDING"}
+            />
+            <ReimbursementList
+              list={approvedReimbursements}
+              setSelected={setSelected}
+              status={"APPROVED"}
+            />
+            <ReimbursementList
+              list={rejectedReimbursements}
+              setSelected={setSelected}
+              status={"REJECTED"}
+            />
+          </div>
+        </div>
+      )}
+      {selected && (
+        <ReimbursementEditForm
+          selected={selected}
           setSelected={setSelected}
-          status={"PENDING"}
         />
-        <ReimbursementList
-          list={approvedReimbursements}
-          setSelected={setSelected}
-          status={"APPROVED"}
-        />
-        <ReimbursementList
-          list={rejectedReimbursements}
-          setSelected={setSelected}
-          status={"REJECTED"}
-        />
-        {selected && (
-          <ReimbursementEditForm
-            selected={selected}
-            setSelected={setSelected}
-          />
-        )}
-      </div>
+      )}
     </div>
   );
 }
