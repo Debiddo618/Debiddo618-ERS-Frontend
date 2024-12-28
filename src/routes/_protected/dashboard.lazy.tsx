@@ -30,12 +30,6 @@ function RouteComponent() {
     setUser(currentUser);
   }, []);
 
-  const { data } = useFetchReimbursementByUser(user?.userId, user);
-
-  const pendingReimbursements = data?.filter((reimbursement: Reimbursements) => reimbursement.status === 'pending') || [];
-  const approvedReimbursements = data?.filter((reimbursement: Reimbursements) => reimbursement.status === 'approved') || [];
-  const rejectedReimbursements = data?.filter((reimbursement: Reimbursements) => reimbursement.status === 'rejected') || [];
-
   const { data: role } = useFetchRole(user?.userId);
 
   return (
@@ -45,19 +39,19 @@ function RouteComponent() {
           {role === "MANAGER" ? <ReimbursementTable /> : null}
           <div className='flex justify-evenly p-4 w-screen backdrop-blur-lg bg-white/30'>
             <ReimbursementList
-              list={pendingReimbursements}
               setSelected={setSelected}
-              status={"PENDING"}
+              status={"pending"}
+              user={user}
             />
             <ReimbursementList
-              list={approvedReimbursements}
               setSelected={setSelected}
-              status={"APPROVED"}
+              status={"approved"}
+              user={user}
             />
             <ReimbursementList
-              list={rejectedReimbursements}
               setSelected={setSelected}
-              status={"REJECTED"}
+              status={"rejected"}
+              user={user}
             />
           </div>
         </div>

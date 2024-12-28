@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Reimbursement from './Reimbursement';
+import { useFetchReimbursementByUser } from '@/hooks/use-fetchReimbursementByUser';
 
 type Reimbursements = {
     reimbId: number;
@@ -9,16 +10,26 @@ type Reimbursements = {
 };
 
 type ReimbursementListProps = {
-    list: Reimbursements[];
     setSelected: any;
     status: string;
+    user: any;
 };
 
-export default function ReimbursementList({ list, setSelected, status }: ReimbursementListProps) {
+export default function ReimbursementList({ setSelected, status, user }: ReimbursementListProps) {
+    const [reimb, setReimb] = useState<Reimbursements[]>([]);
+
+    const { data } = useFetchReimbursementByUser(user?.userId, user);
+
+    const reimbursements = data?.filter((reimbursement: Reimbursements) => reimbursement.status === status) || [];
+
+    useEffect(()=>{
+        setReimb(data);
+    },[reimb,data])
+
     return (
         <div className="w-50 h-screen rounded-md p-3 bg-zinc-50 shadow-md">
-            <h1 className='mb-3 text-center font-semibold w-[350px]'>{status}</h1>
-            {list.map((reimbursement: Reimbursements) => (
+            <h1 className='mb-3 text-center font-semibold w-[350px]'>{status.toUpperCase()}</h1>
+            {reimbursements.map((reimbursement: Reimbursements) => (
                 <div key={reimbursement.reimbId}>
                     <Reimbursement
                         description={reimbursement.description}
