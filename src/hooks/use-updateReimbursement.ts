@@ -9,7 +9,7 @@ export function useUpdateReimbursement() {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: async ({ id, values }: { id: number; values: ReimbursementSchema }) => {
+        mutationFn: async ({ id, values }: { id: number, values: ReimbursementSchema }) => {
             const resp = await axiosInstance.put(`/api/reimbursements/${id}`, values);
             return resp.data;
         },
@@ -19,7 +19,7 @@ export function useUpdateReimbursement() {
             });
             queryClient.invalidateQueries({
                 queryKey: ["reimb"]
-            });            
+            });
         },
         onError: () => {
             toast({

@@ -21,7 +21,7 @@ export function useCreateReimbursement() {
                 title: "Reimbursement created successfully",
             })
             queryClient.invalidateQueries({
-                queryKey: ["reimb"]
+                queryKey: ["reimb", "allReimb"]
             })
 
             // router.navigate({ to: "/dashboard" });

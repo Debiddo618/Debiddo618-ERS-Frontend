@@ -8,6 +8,7 @@ import ReimbursementEditForm from '@/components/Reimbursement-editform';
 import ReimbursementList from '@/components/Reimbursement-list';
 import { useFetchRole } from '@/hooks/use-fetchRole';
 import { useFetchReimbursementByUser } from '@/hooks/use-fetchReimbursementByUser';
+import { ReimbursementTable } from '@/components/Reimbursement-table';
 
 export const Route = createLazyFileRoute('/_protected/dashboard')({
   component: RouteComponent,
@@ -35,32 +36,35 @@ function RouteComponent() {
   const approvedReimbursements = data?.filter((reimbursement: Reimbursements) => reimbursement.status === 'approved') || [];
   const rejectedReimbursements = data?.filter((reimbursement: Reimbursements) => reimbursement.status === 'rejected') || [];
 
-  // const { data: role } = useFetchRole(user?.userId);
+  const { data: role } = useFetchRole(user?.userId);
 
   return (
-    <div className='flex justify-evenly p-4 w-screen backdrop-blur-lg bg-white/30'>
-      <ReimbursementList
-        list={pendingReimbursements}
-        setSelected={setSelected}
-        status={"PENDING"}
-      />
-      <ReimbursementList
-        list={approvedReimbursements}
-        setSelected={setSelected}
-        status={"APPROVED"}
-      />
-      <ReimbursementList
-        list={rejectedReimbursements}
-        setSelected={setSelected}
-        status={"REJECTED"}
-      />
+    <div className="">
+      {role === "MANAGER" ? <ReimbursementTable /> : null}
 
-      {selected && (
-        <ReimbursementEditForm
-          selected={selected}
+      <div className='flex justify-evenly p-4 w-screen backdrop-blur-lg bg-white/30'>
+        <ReimbursementList
+          list={pendingReimbursements}
           setSelected={setSelected}
+          status={"PENDING"}
         />
-      )}
+        <ReimbursementList
+          list={approvedReimbursements}
+          setSelected={setSelected}
+          status={"APPROVED"}
+        />
+        <ReimbursementList
+          list={rejectedReimbursements}
+          setSelected={setSelected}
+          status={"REJECTED"}
+        />
+        {selected && (
+          <ReimbursementEditForm
+            selected={selected}
+            setSelected={setSelected}
+          />
+        )}
+      </div>
     </div>
   );
 }

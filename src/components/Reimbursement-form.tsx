@@ -44,7 +44,7 @@ export default function ReimbursementForm({ showForm, setShowForm }: Reimburseme
     if (!showForm) return null;
 
     return (
-        <div className="absolute w-full h-full flex justify-center items-center bg-white z-20 top-0">
+        <div className="absolute w-full h-screen flex justify-center items-center bg-white z-20 top-0">
             <div className="w-96 p-5 rounded-md shadow-md">
                 <div className="text-lg font-semibold mb-8 text-center">New Reimbursement</div>
                 <Form {...form}>
