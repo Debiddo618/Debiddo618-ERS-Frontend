@@ -75,7 +75,13 @@ export function ReimbursementTable() {
                                     <TableCell>{`${user.firstName} ${user.lastName}`}</TableCell>
                                     <TableCell>{reimbursement.description}</TableCell>
                                     <TableCell>{reimbursement.amount}</TableCell>
-                                    <TableCell>{reimbursement.status.toUpperCase()}</TableCell>
+                                    <TableCell className={`    
+                                        ${reimbursement.status === "pending" ? 'text-yellow-500' : ''}
+                                        ${reimbursement.status === "approved" ? 'text-green-500' : ''}
+                                        ${reimbursement.status === "rejected" ? 'text-red-500' : ''}
+                                    `}>
+                                        {reimbursement.status.toUpperCase()}
+                                    </TableCell>
                                     <TableCell className="flex justify-center">
                                         {reimbursement.status === "pending" && (
                                             <button
