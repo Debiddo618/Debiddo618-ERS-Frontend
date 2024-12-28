@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/lib/axios-config";
 
 
-export function useFetchAllReimbursement() {
+export function useFetchAllUsers() {
     return useQuery({
         queryKey: ["users"],
         queryFn: async () => {

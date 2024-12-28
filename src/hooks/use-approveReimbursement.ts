@@ -21,6 +21,9 @@ export function useApproveReimbursement() {
             queryClient.invalidateQueries({
                 queryKey: ["reimbursements"]
             });             
+            queryClient.invalidateQueries({
+                queryKey: ["users"]
+            });             
         },
         onError: () => {
             toast({

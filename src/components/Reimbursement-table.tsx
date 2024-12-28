@@ -9,7 +9,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { useApproveReimbursement } from "@/hooks/use-approveReimbursement";
-import { useFetchAllReimbursement } from "@/hooks/use-fetchAllReimbursement";
+import { useFetchAllUsers } from "@/hooks/use-fetchAllUsers";
 import { usePendReimbursement } from "@/hooks/use-pendReimbursement";
 import { useRejectReimbursement } from "@/hooks/use-rejectReimbursement";
 
@@ -20,13 +20,22 @@ type Reimbursements = {
     status: "pending" | "approved" | "rejected";
 };
 
+type User = {
+    id: number,
+    firstName: string,
+    lastName: string,
+    username: string,
+    password: string,
+    role: "EMPLOYEE" | "MANAGER",
+    reimbursements: Reimbursements[]
+}
+
 export function ReimbursementTable() {
-    const { data, isLoading, isError, error } = useFetchAllReimbursement();
+    const { data: userData } = useFetchAllUsers();
 
     const { mutate: approve, isApprovePending } = useApproveReimbursement();
     const { mutate: reject, isRejectPending } = useRejectReimbursement();
     const { mutate: pend, isPendPending } = usePendReimbursement();
-
 
     const handleApprove = (id: number) => {
         approve(id);
@@ -42,12 +51,14 @@ export function ReimbursementTable() {
 
     return (
         <div className="my-4 w-full px-52 mx-auto">
-            {data && (
+            {userData && (
                 <Table className="w-full">
                     <TableCaption>A list of all reimbursements</TableCaption>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Id</TableHead>
+                            <TableHead>ReimbId</TableHead>
+                            <TableHead>Username</TableHead>
+                            <TableHead>Full Name</TableHead>
                             <TableHead>Description</TableHead>
                             <TableHead>Amount</TableHead>
                             <TableHead>Status</TableHead>
@@ -56,50 +67,54 @@ export function ReimbursementTable() {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {data.map((reimbursement: Reimbursements) => (
-                            <TableRow key={reimbursement.reimbId}>
-                                <TableCell className="font-medium">{reimbursement.reimbId}</TableCell>
-                                <TableCell>{reimbursement.description}</TableCell>
-                                <TableCell>{reimbursement.amount}</TableCell>
-                                <TableCell>{reimbursement.status.toUpperCase()}</TableCell>
-                                <TableCell className="flex justify-center">
-                                    {reimbursement.status === "pending" && (
-                                        <button
-                                            className="px-4 py-2 bg-blue-500 text-white rounded"
-                                            onClick={() => handleApprove(reimbursement.reimbId)}
-                                        >
-                                            Approve
-                                        </button>
-                                    )}
-                                    {reimbursement.status === "approved" && (
-                                        <button
-                                            className="px-4 py-2 bg-yellow-500 text-white rounded"
-                                            onClick={() => handleUndo(reimbursement.reimbId)}
-                                        >
-                                            Undo
-                                        </button>
-                                    )}
-                                </TableCell>
-                                <TableCell>
-                                    {reimbursement.status === "pending" && (
-                                        <button
-                                            className="px-4 py-2 bg-red-500 text-white rounded"
-                                            onClick={() => handleReject(reimbursement.reimbId)}
-                                        >
-                                            Reject
-                                        </button>
-                                    )}
-                                    {reimbursement.status === "rejected" && (
-                                        <button
-                                            className="px-4 py-2 bg-yellow-500 text-white rounded"
-                                            onClick={() => handleUndo(reimbursement.reimbId)}
-                                        >
-                                            Undo
-                                        </button>
-                                    )}
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                        {userData.map((user: User) => {
+                            return user.reimbursements.map((reimbursement: Reimbursements) => (
+                                <TableRow key={reimbursement.reimbId}>
+                                    <TableCell className="font-medium">{reimbursement.reimbId}</TableCell>
+                                    <TableCell>{user.username}</TableCell>
+                                    <TableCell>{`${user.firstName} ${user.lastName}`}</TableCell>
+                                    <TableCell>{reimbursement.description}</TableCell>
+                                    <TableCell>{reimbursement.amount}</TableCell>
+                                    <TableCell>{reimbursement.status.toUpperCase()}</TableCell>
+                                    <TableCell className="flex justify-center">
+                                        {reimbursement.status === "pending" && (
+                                            <button
+                                                className="px-4 py-2 bg-blue-500 text-white rounded"
+                                                onClick={() => handleApprove(reimbursement.reimbId)}
+                                            >
+                                                Approve
+                                            </button>
+                                        )}
+                                        {reimbursement.status === "approved" && (
+                                            <button
+                                                className="px-4 py-2 bg-yellow-500 text-white rounded"
+                                                onClick={() => handleUndo(reimbursement.reimbId)}
+                                            >
+                                                Undo
+                                            </button>
+                                        )}
+                                    </TableCell>
+                                    <TableCell>
+                                        {reimbursement.status === "pending" && (
+                                            <button
+                                                className="px-4 py-2 bg-red-500 text-white rounded"
+                                                onClick={() => handleReject(reimbursement.reimbId)}
+                                            >
+                                                Reject
+                                            </button>
+                                        )}
+                                        {reimbursement.status === "rejected" && (
+                                            <button
+                                                className="px-4 py-2 bg-yellow-500 text-white rounded"
+                                                onClick={() => handleUndo(reimbursement.reimbId)}
+                                            >
+                                                Undo
+                                            </button>
+                                        )}
+                                    </TableCell>
+                                </TableRow>
+                            ));
+                        })}
                     </TableBody>
                 </Table>
             )}

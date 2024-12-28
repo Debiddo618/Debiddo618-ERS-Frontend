@@ -25,6 +25,9 @@ export function useCreateReimbursement() {
             queryClient.invalidateQueries({
                 queryKey: ["allReimb"]
             })
+            queryClient.invalidateQueries({
+                queryKey: ["users"]
+            });
         },
         onError: () => {
             toast({

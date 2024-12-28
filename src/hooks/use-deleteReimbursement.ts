@@ -20,6 +20,12 @@ export function useDeleteReimbursement() {
             queryClient.invalidateQueries({
                 queryKey: ["reimbursements"]
             })
+            queryClient.invalidateQueries({
+                queryKey: ["allReimb"]
+            })
+            queryClient.invalidateQueries({
+                queryKey: ["users"]
+            });
 
             // router.navigate({ to: "/dashboard" });
         },

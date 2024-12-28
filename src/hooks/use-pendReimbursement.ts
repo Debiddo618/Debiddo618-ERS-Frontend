@@ -16,10 +16,13 @@ export function usePendReimbursement() {
                 title: "Reset reimbursement to pending successfully",
             });
             queryClient.invalidateQueries({
-                queryKey: ["allReimb"]
-            });
-            queryClient.invalidateQueries({
                 queryKey: ["reimbursements"]
+            })
+            queryClient.invalidateQueries({
+                queryKey: ["allReimb"]
+            })
+            queryClient.invalidateQueries({
+                queryKey: ["users"]
             });
         },
         onError: () => {
