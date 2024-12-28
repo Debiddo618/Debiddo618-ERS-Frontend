@@ -23,7 +23,7 @@ export default function ReimbursementList({ setSelected, status, user }: Reimbur
     const reimbursements = data?.filter((reimbursement: Reimbursements) => reimbursement.status === status) || [];
 
     return (
-        <div className="w-50 h-screen rounded-md p-3 bg-zinc-50 shadow-md">
+        <div className="w-50 rounded-md p-3 bg-zinc-50 shadow-md">
             <h1 className='mb-3 text-center font-semibold w-[350px]'>{status.toUpperCase()}</h1>
             {reimbursements.map((reimbursement: Reimbursements) => (
                 <div key={reimbursement.reimbId}>
