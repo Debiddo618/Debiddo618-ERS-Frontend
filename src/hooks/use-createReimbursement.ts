@@ -1,13 +1,12 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "@tanstack/react-router";
+import { useNavigate, useRouter } from "@tanstack/react-router";
 import axiosInstance from "@/lib/axios-config";
 import { useToast } from "./use-toast";
 import { ReimbursementSchema } from "@/schemas/reimbursement-schema";
 
 
 export function useCreateReimbursement() {
-    // const router = useRouter();
     const { toast } = useToast()
     const queryClient = useQueryClient();
 
@@ -20,11 +19,9 @@ export function useCreateReimbursement() {
             toast({
                 title: "Reimbursement created successfully",
             })
-            // queryClient.invalidateQueries({
-            //     queryKey: ["reimb", "allReimb"]
-            // })
-
-            // router.navigate({ to: "/dashboard" });
+            queryClient.invalidateQueries({
+                queryKey: ["reimbursements"]
+            })
         },
         onError: () => {
             toast({
