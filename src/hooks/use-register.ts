@@ -13,8 +13,6 @@ export function useRegister() {
     return useMutation({
         mutationFn: async (values: RegisterSchema) => {
             const resp = await axiosInstance.post("/api/users/register", values);
-            console.log(resp);
-            console.log(resp.data);
             return resp.data;
         },
         onSuccess: () => {

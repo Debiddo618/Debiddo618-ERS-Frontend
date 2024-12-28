@@ -10,8 +10,6 @@ export function useLogout() {
     toast({
       title: "Logged out successfully",
     });
-    console.log("inside logout hook")
-
     router.navigate({ to: "/" });
   };
 

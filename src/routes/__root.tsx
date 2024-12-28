@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster"
 export const Route = createRootRoute({
     component: () => (
         <>
-            <Outlet />
+             <Outlet />
             <Toaster />
             <TanStackRouterDevtools />
         </>

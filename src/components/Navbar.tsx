@@ -1,6 +1,4 @@
-import { User, getUser } from '@/lib/authUtils';
 import { Link } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
 import { UserDropdown } from './user-dropdown';
 import { Button } from './ui/button';
 
@@ -10,12 +8,6 @@ interface NavbarProps {
 }
 
 export default function Navbar({ showForm, setShowForm }: NavbarProps) {
-    const [user, setUser] = useState<User | null>(null);
-
-    useEffect(() => {
-        setUser(getUser());
-    }, []);
-
     return (
         <div className="p-2 px-36 flex items-center gap-2 justify-between shadow-md z-30 relative">
             <Link to="/dashboard" className="[&.active]:font-bold">
