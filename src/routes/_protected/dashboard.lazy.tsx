@@ -36,7 +36,7 @@ function RouteComponent() {
     <div>
       {(!selected && !show) && (
         <div>
-          {role === "MANAGER" && <ManagerDashboard />}
+          {role === "MANAGER" && <ManagerDashboard userId={user?.userId} />}
           {role === "EMPLOYEE" && (
             <div className='flex justify-evenly p-4 w-screen backdrop-blur-lg bg-white/30'>
               <ReimbursementList

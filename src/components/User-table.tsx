@@ -20,9 +20,10 @@ type User = {
 
 type ReimbursementTableProps = {
     userData: User[];
+    userId: number;
 };
 
-export function UserTable({ userData }: ReimbursementTableProps) {
+export function UserTable({ userData, userId }: ReimbursementTableProps) {
     const { mutate: update } = useUpdateUserRole();
 
     const handlePromote = (id: number) => {
@@ -34,7 +35,6 @@ export function UserTable({ userData }: ReimbursementTableProps) {
     };
 
     const handleDelete = (id: number) => {
-        // delete
     };
 
     if (!userData) {
@@ -66,28 +66,34 @@ export function UserTable({ userData }: ReimbursementTableProps) {
                             <TableCell>{user.lastName}</TableCell>
                             <TableCell>{user.role}</TableCell>
                             <TableCell>
-                                <button
-                                    className="px-4 py-2 bg-blue-500 text-white rounded"
-                                    onClick={() => handlePromote(user.id)}
-                                >
-                                    Promote
-                                </button>
+                                {user.id !== userId && (
+                                    <button
+                                        className="px-4 py-2 bg-blue-500 text-white rounded"
+                                        onClick={() => handlePromote(user.id)}
+                                    >
+                                        Promote
+                                    </button>
+                                )}
                             </TableCell>
                             <TableCell>
-                                <button
-                                    className="px-4 py-2 bg-yellow-500 text-white rounded"
-                                    onClick={() => handleDemote(user.id)}
-                                >
-                                    Demote
-                                </button>
+                                {user.id !== userId && (
+                                    <button
+                                        className="px-4 py-2 bg-yellow-500 text-white rounded"
+                                        onClick={() => handleDemote(user.id)}
+                                    >
+                                        Demote
+                                    </button>
+                                )}
                             </TableCell>
                             <TableCell>
-                                <button
-                                    className="px-4 py-2 bg-red-500 text-white rounded"
-                                    onClick={() => handleDelete(user.id)}
-                                >
-                                    Delete
-                                </button>
+                                {user.id !== userId && (
+                                    <button
+                                        className="px-4 py-2 bg-red-500 text-white rounded"
+                                        onClick={() => handleDelete(user.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                )}
                             </TableCell>
                         </TableRow>
                     ))}
