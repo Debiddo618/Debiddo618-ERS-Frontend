@@ -8,6 +8,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import { useDeleteUser } from "@/hooks/use-deleteUser";
 import { useUpdateUserRole } from "@/hooks/use-updateUserRole";
 
 type User = {
@@ -25,6 +26,7 @@ type ReimbursementTableProps = {
 
 export function UserTable({ userData, userId }: ReimbursementTableProps) {
     const { mutate: update } = useUpdateUserRole();
+    const { mutate: deleteUser } = useDeleteUser();
 
     const handlePromote = (id: number) => {
         update({ id, role: "MANAGER" });
@@ -35,6 +37,7 @@ export function UserTable({ userData, userId }: ReimbursementTableProps) {
     };
 
     const handleDelete = (id: number) => {
+        deleteUser(id)
     };
 
     if (!userData) {

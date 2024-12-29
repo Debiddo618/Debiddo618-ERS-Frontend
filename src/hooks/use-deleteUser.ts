@@ -1,0 +1,37 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "@tanstack/react-router";
+import axiosInstance from "@/lib/axios-config";
+import { useToast } from "./use-toast";
+
+export function useDeleteUser() {
+    const { toast } = useToast()
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: async (id: number) => {
+            const resp = await axiosInstance.delete(`/api/users/${id}`);
+            return resp.data;
+        },
+        onSuccess: () => {
+            toast({
+                title: "User deleted successfully",
+            })
+            queryClient.invalidateQueries({
+                queryKey: ["reimbursements"]
+            })
+            queryClient.invalidateQueries({
+                queryKey: ["allReimb"]
+            })
+            queryClient.invalidateQueries({
+                queryKey: ["users"]
+            });
+
+            // router.navigate({ to: "/dashboard" });
+        },
+        onError: () => {
+            toast({
+                title: "Failed to delete user",
+            })
+        },
+    });
+}
