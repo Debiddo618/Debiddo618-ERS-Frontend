@@ -6,9 +6,9 @@ export default function ManagerDashboard({ userId }: any) {
     const { data: userData } = useFetchAllUsers();
 
     return (
-        <div className="">
+        <>
             <ReimbursementTable userData={userData} />
             <UserTable userData={userData} userId={userId} />
-        </div>
+        </>
     )
 }

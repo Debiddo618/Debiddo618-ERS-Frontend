@@ -34,9 +34,9 @@ type ReimbursementTableProps = {
 };
 
 export function ReimbursementTable({ userData }: ReimbursementTableProps) {
-    const { mutate: approve, isApprovePending } = useApproveReimbursement();
-    const { mutate: reject, isRejectPending } = useRejectReimbursement();
-    const { mutate: pend, isPendPending } = usePendReimbursement();
+    const { mutate: approve } = useApproveReimbursement();
+    const { mutate: reject } = useRejectReimbursement();
+    const { mutate: pend } = usePendReimbursement();
 
     const handleApprove = (id: number) => {
         approve(id);
@@ -51,10 +51,10 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
     };
 
     return (
-        <div className="my-4 w-full px-36 mx-auto">
+        <div className="bg-zinc-50 shadow-md h-[40vh] mx-36 my-5 p-3">
+            <h1 className="text-center font-bold">Reimbursements</h1>
             {userData && (
                 <Table className="w-full">
-                    <TableCaption>A list of all Reimbursements</TableCaption>
                     <TableHeader>
                         <TableRow>
                             <TableHead>ReimbId</TableHead>
