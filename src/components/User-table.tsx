@@ -45,7 +45,7 @@ export function UserTable({ userData, userId }: ReimbursementTableProps) {
     }
 
     return (
-        <div className="bg-zinc-50 shadow-md h-[40vh] mx-36 my-5 p-3">
+        <div className="bg-zinc-50 shadow-md min-h-[40vh] mx-36 my-5 p-3">
             <h1 className="text-center font-bold">Users</h1>
 
             <Table className="w-full">

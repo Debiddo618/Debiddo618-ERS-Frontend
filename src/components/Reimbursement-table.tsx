@@ -51,7 +51,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
     };
 
     return (
-        <div className="bg-zinc-50 shadow-md h-[40vh] mx-36 my-5 p-3">
+        <div className="bg-zinc-50 shadow-md min-h-[40vh] mx-36 my-5 p-3">
             <h1 className="text-center font-bold">Reimbursements</h1>
             {userData && (
                 <Table className="w-full">
