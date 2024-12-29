@@ -8,6 +8,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import { useUpdateUserRole } from "@/hooks/use-updateUserRole";
 
 type User = {
     id: number;
@@ -22,17 +23,23 @@ type ReimbursementTableProps = {
 };
 
 export function UserTable({ userData }: ReimbursementTableProps) {
+    const { mutate: update } = useUpdateUserRole();
+
     const handlePromote = (id: number) => {
-        // promote
+        update({ id, role: "MANAGER" });
     };
 
     const handleDemote = (id: number) => {
-        // demote
+        update({ id, role: "EMPLOYEE" });
     };
 
     const handleDelete = (id: number) => {
         // delete
     };
+
+    if (!userData) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="my-4 w-full px-36 mx-auto">
@@ -51,7 +58,7 @@ export function UserTable({ userData }: ReimbursementTableProps) {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {userData.map((user: User) => (
+                    {userData.sort((a, b) => a.id - b.id).map((user: User) => (
                         <TableRow key={user.id}>
                             <TableCell className="font-medium">{user.id}</TableCell>
                             <TableCell>{user.username}</TableCell>
