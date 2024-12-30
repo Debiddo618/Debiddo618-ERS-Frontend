@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import Reimbursement from './Reimbursement';
 import { useFetchReimbursementByUser } from '@/hooks/use-fetchReimbursementByUser';
 
@@ -16,8 +15,6 @@ type ReimbursementListProps = {
 };
 
 export default function ReimbursementList({ setSelected, status, user }: ReimbursementListProps) {
-    const [reimb, setReimb] = useState<Reimbursements[]>([]);
-
     const { data } = useFetchReimbursementByUser(user?.userId, user);
 
     const reimbursements = data?.filter((reimbursement: Reimbursements) => reimbursement.status === status) || [];
