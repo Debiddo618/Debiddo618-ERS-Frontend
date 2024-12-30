@@ -1,6 +1,6 @@
 import { LoginSchema } from "../schemas/login-schema";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation} from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import axiosInstance from "@/lib/axios-config";
 import { useToast } from "./use-toast";
