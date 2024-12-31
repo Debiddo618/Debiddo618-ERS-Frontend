@@ -6,7 +6,10 @@ const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
     headers: {
         "Content-Type": "application/json",
-    }
+    },
+    httpsAgent: new (require('https').Agent)({
+        rejectUnauthorized: false,
+    }),
 })
 
 const isTokenExpired = (token: string): boolean => {
