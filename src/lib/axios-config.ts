@@ -1,5 +1,7 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import https from 'https';
+
 
 
 const axiosInstance = axios.create({
@@ -7,9 +9,7 @@ const axiosInstance = axios.create({
     headers: {
         "Content-Type": "application/json",
     },
-    httpsAgent: new (require('https').Agent)({
-        rejectUnauthorized: false,
-    }),
+    httpsAgent: new https.Agent({ rejectUnauthorized: false })
 })
 
 const isTokenExpired = (token: string): boolean => {
