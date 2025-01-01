@@ -75,11 +75,11 @@ export default function ReimbursementForm({ showForm, setShowForm }: Reimburseme
                                 </FormItem>
                             )}
                         />
-                        <div className="flex justify-evenly w-full">
+                        <div className="flex justify-evenly w-full !mt-5">
                             <Button type="button" onClick={() => setShowForm(false)} disabled={isPending} className="w-1/3" variant={"outline"}>
                                 Cancel
                             </Button>
-                            <Button type="submit" disabled={isPending} className="w-1/3">
+                            <Button type="submit" disabled={isPending} className="w-1/3 bg-blue-500 hover:bg-blue-500 hover:opacity-75">
                                 Create
                             </Button>
                         </div>

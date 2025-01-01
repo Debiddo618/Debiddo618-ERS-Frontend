@@ -32,8 +32,8 @@ const Reimbursement: React.FC<Reimbursement> = ({ id, description, amount, statu
                 <CardDescription>Status: {status.toUpperCase()}</CardDescription>
             </CardHeader>
             <CardFooter className={`flex ${(!showEdit || !showDelete) ? 'justify-center' : 'justify-between'}`}>
-                {showEdit && <Button onClick={() => selected({ reimbId: id, description, amount, status })} variant="outline">Edit</Button>}
-                {showDelete && <Button onClick={() => deleteById(id)}>Delete</Button>}
+                {showEdit && <Button onClick={() => selected({ reimbId: id, description, amount, status })} className="bg-green-500 hover:bg-green-500 hover:opacity-75">Edit</Button>}
+                {showDelete && <Button className="bg-red-500 hover:bg-red-500 hover:opacity-75" onClick={() => deleteById(id)}>Delete</Button>}
             </CardFooter>
         </Card>
     )

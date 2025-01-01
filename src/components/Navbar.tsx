@@ -14,7 +14,8 @@ export default function Navbar({ showForm, setShowForm }: NavbarProps) {
                 ERS
             </Link>
             <div className="flex items-center gap-5">
-                <Button onClick={() => setShowForm(!showForm)}>{showForm ? "Back to Dashboard" : "Create Reimbursements"}</Button>
+                {!showForm && <Button className='bg-blue-500 hover:bg-blue-500 hover:opacity-75' onClick={() => setShowForm(!showForm)}>Create Reimbursement</Button>
+                }
                 <UserDropdown />
             </div>
         </div>
