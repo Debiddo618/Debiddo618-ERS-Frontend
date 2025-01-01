@@ -3,12 +3,12 @@ import { RegisterSchema } from "../schemas/register-schema";
 import axiosInstance from "@/lib/axios-config";
 import { useToast } from "./use-toast";
 import { useRouter } from "@tanstack/react-router";
+import axios from "axios";
 
 
 export function useRegister() {
-    const { toast } = useToast()
+    const { toast } = useToast();
     const router = useRouter();
-
 
     return useMutation({
         mutationFn: async (values: RegisterSchema) => {
@@ -18,14 +18,21 @@ export function useRegister() {
         onSuccess: () => {
             toast({
                 title: "Account Created",
-            })
+            });
             router.navigate({ to: "/login" });
-
         },
-        onError: () => {
-            toast({
-                title: "Failed to create account",
-            })
+        onError: (error: any) => {
+            if (axios.isAxiosError(error) && error.response?.status === 409) {
+                toast({
+                    title: "Failed to create account",
+                    description: "An account with this username already exists.",
+                });
+            } else {
+                toast({
+                    title: "Failed to create account",
+                    description: `Unexpected error: ${error.message}`,
+                });
+            }
         },
     });
 }
