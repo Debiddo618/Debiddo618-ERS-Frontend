@@ -70,7 +70,7 @@ export default function LoginForm() {
                             </FormItem>
                         )}
                     />
-                    <Button type="submit" disabled={isPending} className="w-full">
+                    <Button type="submit" disabled={isPending} className="w-full bg-blue-500 hover:opacity-75 hover:bg-blue-500 !mt-5">
                         Login
                     </Button>
                 </form>
