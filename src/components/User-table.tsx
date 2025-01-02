@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/table";
 import { useDeleteUser } from "@/hooks/use-deleteUser";
 import { useUpdateUserRole } from "@/hooks/use-updateUserRole";
+import ConfirmationForm from "./Confirmation-form";
+import { useState } from "react";
 
 type User = {
     id: number;
@@ -24,7 +26,12 @@ type ReimbursementTableProps = {
 
 export function UserTable({ userData, userId }: ReimbursementTableProps) {
     const { mutate: update } = useUpdateUserRole();
-    const { mutate: deleteUser } = useDeleteUser();
+
+    const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
+
+    const handleShowConfirmationForm = (id: number) => {
+        setSelectedUserId(id);
+    };
 
     const handlePromote = (id: number) => {
         update({ id, role: "MANAGER" });
@@ -32,10 +39,6 @@ export function UserTable({ userData, userId }: ReimbursementTableProps) {
 
     const handleDemote = (id: number) => {
         update({ id, role: "EMPLOYEE" });
-    };
-
-    const handleDelete = (id: number) => {
-        deleteUser(id)
     };
 
     if (!userData) {
@@ -91,12 +94,22 @@ export function UserTable({ userData, userId }: ReimbursementTableProps) {
                                 {user.id !== userId && (
                                     <button
                                         className="px-4 py-2 bg-red-500 text-white rounded hover:opacity-75"
-                                        onClick={() => handleDelete(user.id)}
+                                        onClick={() => handleShowConfirmationForm(user.id)}
                                     >
                                         Delete
                                     </button>
                                 )}
                             </TableCell>
+
+                            {selectedUserId === user.id && (
+                                <ConfirmationForm
+                                    id={user.id}
+                                    message={`Are you sure you want to delete this user?`}
+                                    entity={"user"}
+                                    handleCloseForm={() => setSelectedUserId(null)}
+                                    user={user}
+                                />
+                            )}
                         </TableRow>
                     ))}
                 </TableBody>
