@@ -6,7 +6,6 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { useDeleteUser } from "@/hooks/use-deleteUser";
 import { useUpdateUserRole } from "@/hooks/use-updateUserRole";
 import ConfirmationForm from "./Confirmation-form";
 import { useState } from "react";
@@ -49,7 +48,7 @@ export function UserTable({ userData, userId }: ReimbursementTableProps) {
         <div className="bg-zinc-50 shadow-md min-h-[40vh] mx-36 my-5 p-3">
             <h1 className="text-center font-bold">Users</h1>
 
-            <Table className="w-full min-h-[25vh]">
+            <Table className={`w-full ${selectedUserId ? "min-h-[30vh]" : ""}`}>
                 <TableHeader>
                     <TableRow>
                         <TableHead>ReimbId</TableHead>

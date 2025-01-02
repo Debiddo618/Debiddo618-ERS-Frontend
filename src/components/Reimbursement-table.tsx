@@ -68,7 +68,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
             {!selected && <div className="bg-zinc-50 shadow-md min-h-[40vh] mx-36 my-5 p-3">
                 <h1 className="text-center font-bold">Reimbursements</h1>
                 {userData && (
-                    <Table className="w-full min-h-[25vh]">
+                    <Table className={`w-full ${selectedReimbId ? "min-h-[30vh]" : ""}`}>
                         <TableHeader>
                             <TableRow>
                                 <TableHead>ReimbId</TableHead>
@@ -153,7 +153,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                         </TableCell>
                                         {selectedReimbId === reimbursement.reimbId && (
                                             <ConfirmationForm
-                                                id={user.id}
+                                                id={reimbursement.reimbId}
                                                 message={`Are you sure you want to delete this reimbursement?`}
                                                 entity={"reimbursement"}
                                                 handleCloseForm={() => setSelectedReimbId(null)}
