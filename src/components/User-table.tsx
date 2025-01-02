@@ -100,16 +100,18 @@ export function UserTable({ userData, userId }: ReimbursementTableProps) {
                                 )}
                             </TableCell>
 
-                            {selectedUserId === user.id && (
-                                <ConfirmationForm
-                                    id={user.id}
-                                    message={`Are you sure you want to delete this user?`}
-                                    entity={"user"}
-                                    handleCloseForm={() => setSelectedUserId(null)}
-                                    user={user}
-                                    reimbursement={null}
-                                />
-                            )}
+                            <td>
+                                {selectedUserId === user.id && (
+                                    <ConfirmationForm
+                                        id={user.id}
+                                        message={`Are you sure you want to delete this user?`}
+                                        entity={"user"}
+                                        handleCloseForm={() => setSelectedUserId(null)}
+                                        user={user}
+                                        reimbursement={null}
+                                    />
+                                )}
+                            </td>
                         </TableRow>
                     ))}
                 </TableBody>

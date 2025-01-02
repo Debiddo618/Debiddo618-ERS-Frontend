@@ -151,16 +151,19 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                                 Delete
                                             </button>
                                         </TableCell>
-                                        {selectedReimbId === reimbursement.reimbId && (
-                                            <ConfirmationForm
-                                                id={reimbursement.reimbId}
-                                                message={`Are you sure you want to delete this reimbursement?`}
-                                                entity={"reimbursement"}
-                                                handleCloseForm={() => setSelectedReimbId(null)}
-                                                user={null}
-                                                reimbursement={reimbursement}
-                                            />
-                                        )}
+                                        <td>
+                                            {selectedReimbId === reimbursement.reimbId && (
+                                                <ConfirmationForm
+                                                    id={reimbursement.reimbId}
+                                                    message={`Are you sure you want to delete this reimbursement?`}
+                                                    entity={"reimbursement"}
+                                                    handleCloseForm={() => setSelectedReimbId(null)}
+                                                    user={null}
+                                                    reimbursement={reimbursement}
+                                                />
+                                            )}
+                                        </td>
+
                                     </TableRow>
                                 ));
                             })}
