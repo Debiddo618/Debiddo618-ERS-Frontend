@@ -49,7 +49,7 @@ export function UserTable({ userData, userId }: ReimbursementTableProps) {
         <div className="bg-zinc-50 shadow-md min-h-[40vh] mx-36 my-5 p-3">
             <h1 className="text-center font-bold">Users</h1>
 
-            <Table className="w-full">
+            <Table className="w-full min-h-[25vh]">
                 <TableHeader>
                     <TableRow>
                         <TableHead>ReimbId</TableHead>
@@ -108,6 +108,7 @@ export function UserTable({ userData, userId }: ReimbursementTableProps) {
                                     entity={"user"}
                                     handleCloseForm={() => setSelectedUserId(null)}
                                     user={user}
+                                    reimbursement={null}
                                 />
                             )}
                         </TableRow>

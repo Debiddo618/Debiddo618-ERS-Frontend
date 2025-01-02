@@ -11,6 +11,7 @@ import { usePendReimbursement } from "@/hooks/use-pendReimbursement";
 import { useRejectReimbursement } from "@/hooks/use-rejectReimbursement";
 import ReimbursementEditForm from "./Reimbursement-editform";
 import { useState } from "react";
+import ConfirmationForm from "./Confirmation-form";
 
 type Reimbursements = {
     reimbId: number;
@@ -39,6 +40,12 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
 
     const [selected, setSelected] = useState<Reimbursements | null>(null);
 
+    const [selectedReimbId, setSelectedReimbId] = useState<number | null>(null);
+
+    const handleShowConfirmationForm = (id: number) => {
+        setSelectedReimbId(id);
+    };
+
 
     const handleApprove = (id: number) => {
         approve(id);
@@ -61,7 +68,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
             {!selected && <div className="bg-zinc-50 shadow-md min-h-[40vh] mx-36 my-5 p-3">
                 <h1 className="text-center font-bold">Reimbursements</h1>
                 {userData && (
-                    <Table className="w-full">
+                    <Table className="w-full min-h-[25vh]">
                         <TableHeader>
                             <TableRow>
                                 <TableHead>ReimbId</TableHead>
@@ -70,9 +77,10 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                 <TableHead>Description</TableHead>
                                 <TableHead>Amount</TableHead>
                                 <TableHead>Status</TableHead>
-                                <TableHead className="text-center">Approve</TableHead>
+                                <TableHead>Approve</TableHead>
                                 <TableHead>Reject</TableHead>
                                 <TableHead>Edit</TableHead>
+                                <TableHead>Delete</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -91,10 +99,10 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                         `}>
                                             {reimbursement.status.toUpperCase()}
                                         </TableCell>
-                                        <TableCell className="flex justify-center">
+                                        <TableCell>
                                             {reimbursement.status === "pending" && (
                                                 <button
-                                                    className="px-4 py-2 bg-blue-500 text-white rounded hover:opacity-75"
+                                                    className="px-4 py-2 bg-blue-500 text-white rounded"
                                                     onClick={() => handleApprove(reimbursement.reimbId)}
                                                 >
                                                     Approve
@@ -102,7 +110,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                             )}
                                             {reimbursement.status === "approved" && (
                                                 <button
-                                                    className="px-4 py-2 bg-yellow-500 text-white rounded hover:opacity-75"
+                                                    className="px-4 py-2 bg-yellow-500 text-white rounded"
                                                     onClick={() => handleUndo(reimbursement.reimbId)}
                                                 >
                                                     Undo
@@ -112,7 +120,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                         <TableCell>
                                             {reimbursement.status === "pending" && (
                                                 <button
-                                                    className="px-4 py-2 bg-red-500 text-white rounded hover:opacity-75"
+                                                    className="px-4 py-2 bg-orange-500 text-white rounded"
                                                     onClick={() => handleReject(reimbursement.reimbId)}
                                                 >
                                                     Reject
@@ -120,7 +128,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                             )}
                                             {reimbursement.status === "rejected" && (
                                                 <button
-                                                    className="px-4 py-2 bg-yellow-500 text-white rounded hover:opacity-75"
+                                                    className="px-4 py-2 bg-yellow-500 text-white rounded"
                                                     onClick={() => handleUndo(reimbursement.reimbId)}
                                                 >
                                                     Undo
@@ -129,12 +137,30 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                         </TableCell>
                                         <TableCell>
                                             <button
-                                                className="px-4 py-2 bg-green-500 text-white rounded hover:opacity-75"
+                                                className="px-4 py-2 bg-green-500 text-white rounded"
                                                 onClick={() => handleEdit(reimbursement)}
                                             >
                                                 Edit
                                             </button>
                                         </TableCell>
+                                        <TableCell>
+                                            <button
+                                                className="px-4 py-2 bg-red-500 text-white rounded"
+                                                onClick={() => handleShowConfirmationForm(reimbursement.reimbId)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </TableCell>
+                                        {selectedReimbId === reimbursement.reimbId && (
+                                            <ConfirmationForm
+                                                id={user.id}
+                                                message={`Are you sure you want to delete this reimbursement?`}
+                                                entity={"reimbursement"}
+                                                handleCloseForm={() => setSelectedReimbId(null)}
+                                                user={null}
+                                                reimbursement={reimbursement}
+                                            />
+                                        )}
                                     </TableRow>
                                 ));
                             })}

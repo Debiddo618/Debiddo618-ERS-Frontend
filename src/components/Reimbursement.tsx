@@ -40,7 +40,7 @@ const Reimbursement: React.FC<Reimbursement> = ({ id, description, amount, statu
                     {showDelete && <Button className="bg-red-500 hover:bg-red-500 hover:opacity-75" onClick={handleShowConfirmationForm}>Delete</Button>}
                 </CardFooter>
             </Card>
-            {showConfirmationForm && <ConfirmationForm id={id} message={"Are you sure you want to delete this reimbursement?"} entity={"reimbursement"} handleCloseForm={handleShowConfirmationForm} user={null} />
+            {showConfirmationForm && <ConfirmationForm id={id} message={"Are you sure you want to delete this reimbursement?"} entity={"reimbursement"} handleCloseForm={handleShowConfirmationForm} user={null} reimbursement={{ id, description, amount, status }} />
             }
         </div>
     )
