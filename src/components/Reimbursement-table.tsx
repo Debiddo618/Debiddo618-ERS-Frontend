@@ -94,7 +94,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                         <TableCell className="flex justify-center">
                                             {reimbursement.status === "pending" && (
                                                 <button
-                                                    className="px-4 py-2 bg-blue-500 text-white rounded"
+                                                    className="px-4 py-2 bg-blue-500 text-white rounded hover:opacity-75"
                                                     onClick={() => handleApprove(reimbursement.reimbId)}
                                                 >
                                                     Approve
@@ -102,7 +102,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                             )}
                                             {reimbursement.status === "approved" && (
                                                 <button
-                                                    className="px-4 py-2 bg-yellow-500 text-white rounded"
+                                                    className="px-4 py-2 bg-yellow-500 text-white rounded hover:opacity-75"
                                                     onClick={() => handleUndo(reimbursement.reimbId)}
                                                 >
                                                     Undo
@@ -112,7 +112,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                         <TableCell>
                                             {reimbursement.status === "pending" && (
                                                 <button
-                                                    className="px-4 py-2 bg-red-500 text-white rounded"
+                                                    className="px-4 py-2 bg-red-500 text-white rounded hover:opacity-75"
                                                     onClick={() => handleReject(reimbursement.reimbId)}
                                                 >
                                                     Reject
@@ -120,7 +120,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                             )}
                                             {reimbursement.status === "rejected" && (
                                                 <button
-                                                    className="px-4 py-2 bg-yellow-500 text-white rounded"
+                                                    className="px-4 py-2 bg-yellow-500 text-white rounded hover:opacity-75"
                                                     onClick={() => handleUndo(reimbursement.reimbId)}
                                                 >
                                                     Undo
@@ -129,7 +129,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                         </TableCell>
                                         <TableCell>
                                             <button
-                                                className="px-4 py-2 bg-green-500 text-white rounded"
+                                                className="px-4 py-2 bg-green-500 text-white rounded hover:opacity-75"
                                                 onClick={() => handleEdit(reimbursement)}
                                             >
                                                 Edit
