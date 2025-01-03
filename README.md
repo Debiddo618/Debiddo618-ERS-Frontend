@@ -1,51 +1,40 @@
-# React + TypeScript + Vite
+# ERS-Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div id="header" align="center">
 
-Currently, two official plugins are available:
+  <img src="https://i.imgur.com/6nyVG2z.png" width="800" height="400">
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+</div>
 
-## Expanding the ESLint configuration
+## :pencil: Descriptions:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The frontend of the Employee Reimbursement System is developed using <b>TypeScript</b> and <b>React</b>, ensuring type safety and a robust user experience. The interface components are crafted with <b>Shadcn</b>, styled with <b>TailwindCSS</b> for a modern and responsive design. For routing, the system leverages the powerful <b>TanStack Router</b>, providing dynamic and efficient page navigation instead of the conventional React Router. Data fetching and state synchronization are handled seamlessly using <b>TanStack Query</b> in combination with <b>Axios,</b> ensuring efficient API requests and real-time data updates from the backend.
 
-- Configure the top-level `parserOptions` property like this:
+The [backend](https://github.com/Debiddo618/ERS) for the Employee Reimbursement System is developed using <b>Java</b> and the <b>Spring Framework</b>, with <b>Spring Security</b> and <b>JWT</b> implemented for user authentication and OAuth. It integrates a <b>PostgreSQL</b> database hosted on <b>AWS</b> for reliable data management. The application is fully <b>dockerized</b> and deployed on an <b>EC2</b> instance, ensuring efficient operation and scalability. However, its availability is constrained to the duration of the AWS free tier period.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 📊 ERDS:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+<img width="1280" alt="Screenshot 2024-06-06 at 11 24 45 PM" src="https://i.imgur.com/lUz3qrh.png">
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## :computer: Technologies Used:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
-# Debiddo618-ERS-Frontend
+![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![HTML](https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![Postgres](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![AWS](https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
+
+## :satellite: Next Steps:
+
+Here are some potential improvements to the project:
+
+- Use Jotai for global state management instead of react context
+
+- Improve style and website responsiveness
+
+- Deploy frontend
+
+- Currently, any manager can promote or demote employees/managers. Therefore, I might want to create a single super manager that can manage promoting/demoting mannagers.
