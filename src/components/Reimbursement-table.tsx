@@ -81,9 +81,9 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                 <TableHead>Full Name</TableHead>
                                 <TableHead>Description</TableHead>
                                 <TableHead>Amount</TableHead>
-                                <TableHead>Status</TableHead>
-                                <TableHead>Approve</TableHead>
-                                <TableHead>Reject</TableHead>
+                                <TableHead className="w-[10rem]">Status</TableHead>
+                                <TableHead className="w-[15rem]">Approve</TableHead>
+                                <TableHead className="w-[15rem]">Reject</TableHead>
                                 <TableHead>Edit</TableHead>
                                 <TableHead>Delete</TableHead>
                             </TableRow>
