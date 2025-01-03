@@ -51,7 +51,7 @@ export function UserTable({ userData, userId }: ReimbursementTableProps) {
             <Table className={`w-full ${selectedUserId ? "min-h-[30vh]" : ""}`}>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>ReimbId</TableHead>
+                        <TableHead>UserId</TableHead>
                         <TableHead>Username</TableHead>
                         <TableHead>First Name</TableHead>
                         <TableHead>Last Name</TableHead>
