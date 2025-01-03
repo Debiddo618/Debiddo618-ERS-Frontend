@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { RegisterSchema } from "../schemas/register-schema";
 import axiosInstance from "@/lib/axios-config";
-import { useToast } from "./use-toast";
 import { useRouter } from "@tanstack/react-router";
 import axios from "axios";
+import { RegisterSchema } from "@/schemas/register-schema";
+import { useToast } from "../use-toast";
 
 
 export function useRegister() {

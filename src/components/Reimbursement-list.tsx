@@ -1,5 +1,5 @@
 import Reimbursement from './Reimbursement';
-import { useFetchReimbursementByUser } from '@/hooks/use-fetchReimbursementByUser';
+import { useFetchReimbursementByUser } from '@/hooks/reimbursements/use-fetchReimbursementByUser';
 
 type Reimbursements = {
     reimbId: number;

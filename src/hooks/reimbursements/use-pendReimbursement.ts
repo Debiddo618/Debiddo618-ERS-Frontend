@@ -1,23 +1,20 @@
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "@/lib/axios-config";
-import { useToast } from "./use-toast";
-import { ReimbursementSchema } from "@/schemas/reimbursement-schema";
+import { useToast } from "../use-toast";
 
-
-export function useCreateReimbursement() {
-    const { toast } = useToast()
+export function usePendReimbursement() {
+    const { toast } = useToast();
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: async (values: ReimbursementSchema) => {
-            const resp = await axiosInstance.post("/api/reimbursements", values);
+        mutationFn: async (id: number) => {
+            const resp = await axiosInstance.post(`/api/reimbursements/pend/${id}`);
             return resp.data;
         },
         onSuccess: () => {
             toast({
-                title: "Reimbursement created successfully",
-            })
+                title: "Reset reimbursement to pending successfully",
+            });
             queryClient.invalidateQueries({
                 queryKey: ["reimbursements"]
             })
@@ -30,8 +27,8 @@ export function useCreateReimbursement() {
         },
         onError: () => {
             toast({
-                title: "Failed to create reimbursement",
-            })
+                title: "Failed to reset reimbursement to pending",
+            });
         },
     });
 }

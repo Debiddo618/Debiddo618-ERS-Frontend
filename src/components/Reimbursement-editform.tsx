@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 import { reimbursementFormSchema, ReimbursementSchema } from "@/schemas/reimbursement-schema";
-import { useUpdateReimbursement } from "@/hooks/use-updateReimbursement";
+import { useUpdateReimbursement } from "@/hooks/reimbursements/use-updateReimbursement";
 
 interface ReimbursementEditFormProps {
     selected: { reimbId: number, description: string, amount: number } | null,

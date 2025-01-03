@@ -1,5 +1,5 @@
 import { useRouter } from "@tanstack/react-router";
-import { toast } from "./use-toast";
+import { toast } from "../use-toast";
 
 export function useLogout() {
   const router = useRouter();

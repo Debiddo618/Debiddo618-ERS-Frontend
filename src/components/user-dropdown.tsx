@@ -7,7 +7,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UserAvatar } from "./user-avatar";
-import { useLogout } from "@/hooks/use-logout";
+import { useLogout } from "@/hooks/users/use-logout";
 
 export function UserDropdown() {
     const logout = useLogout();

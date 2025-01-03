@@ -1,21 +1,21 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "@/lib/axios-config";
-import { useToast } from "./use-toast";
-import { ReimbursementSchema } from "@/schemas/reimbursement-schema";
+import { useToast } from "../use-toast";
 
-export function useUpdateReimbursement() {
-    const { toast } = useToast();
+export function useDeleteReimbursement() {
+    // const router = useRouter();
+    const { toast } = useToast()
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: async ({ id, values }: { id: number, values: ReimbursementSchema }) => {
-            const resp = await axiosInstance.put(`/api/reimbursements/${id}`, values);
+        mutationFn: async (id: number) => {
+            const resp = await axiosInstance.delete(`/api/reimbursements/${id}`);
             return resp.data;
         },
         onSuccess: () => {
             toast({
-                title: "Reimbursement updated successfully",
-            });
+                title: "Reimbursement deleted successfully",
+            })
             queryClient.invalidateQueries({
                 queryKey: ["reimbursements"]
             })
@@ -25,11 +25,13 @@ export function useUpdateReimbursement() {
             queryClient.invalidateQueries({
                 queryKey: ["users"]
             });
+
+            // router.navigate({ to: "/dashboard" });
         },
         onError: () => {
             toast({
-                title: "Failed to update reimbursement",
-            });
+                title: "Failed to delete reimbursement",
+            })
         },
     });
 }

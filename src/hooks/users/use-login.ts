@@ -1,9 +1,9 @@
-import { LoginSchema } from "../schemas/login-schema";
 
 import { useMutation} from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import axiosInstance from "@/lib/axios-config";
-import { useToast } from "./use-toast";
+import { useToast } from "../use-toast";
+import { LoginSchema } from "@/schemas/login-schema";
 
 
 export function useLogin() {

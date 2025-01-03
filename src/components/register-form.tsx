@@ -11,8 +11,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useRegister } from '@/hooks/use-register';
 import { Link } from '@tanstack/react-router';
+import { useRegister } from "@/hooks/users/use-register";
 
 export default function RegisterForm() {
     const { mutate: register, isPending } = useRegister();

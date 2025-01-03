@@ -1,5 +1,5 @@
 import { ReimbursementTable } from './Reimbursement-table'
-import { useFetchAllUsers } from '@/hooks/use-fetchAllUsers';
+import { useFetchAllUsers } from '@/hooks/users/use-fetchAllUsers';
 import { UserTable } from './User-table';
 
 export default function ManagerDashboard({ userId }: any) {

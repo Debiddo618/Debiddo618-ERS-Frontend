@@ -6,12 +6,13 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { useApproveReimbursement } from "@/hooks/use-approveReimbursement";
-import { usePendReimbursement } from "@/hooks/use-pendReimbursement";
-import { useRejectReimbursement } from "@/hooks/use-rejectReimbursement";
+
 import ReimbursementEditForm from "./Reimbursement-editform";
 import { useState } from "react";
 import ConfirmationForm from "./Confirmation-form";
+import { useApproveReimbursement } from "@/hooks/reimbursements/use-approveReimbursement";
+import { usePendReimbursement } from "@/hooks/reimbursements/use-pendReimbursement";
+import { useRejectReimbursement } from "@/hooks/reimbursements/use-rejectReimbursement";
 
 type Reimbursements = {
     reimbId: number;

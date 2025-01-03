@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "@/lib/axios-config";
-import { useToast } from "./use-toast";
+import { useToast } from "../use-toast";
 
 export function useApproveReimbursement() {
     const { toast } = useToast();

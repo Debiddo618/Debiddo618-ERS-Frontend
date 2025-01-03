@@ -1,20 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "@/lib/axios-config";
-import { useToast } from "./use-toast";
+import { useToast } from "../use-toast";
 
-export function useUpdateUserRole() {
-    const { toast } = useToast();
+export function useDeleteUser() {
+    const { toast } = useToast()
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: async ({ id, role }: { id: number, role:string }) => {
-            const resp = await axiosInstance.put(`/api/users/${id}/role/${role}`);
+        mutationFn: async (id: number) => {
+            const resp = await axiosInstance.delete(`/api/users/${id}`);
             return resp.data;
         },
         onSuccess: () => {
             toast({
-                title: "User role updated successfully",
-            });
+                title: "User deleted successfully",
+            })
             queryClient.invalidateQueries({
                 queryKey: ["reimbursements"]
             })
@@ -24,11 +24,13 @@ export function useUpdateUserRole() {
             queryClient.invalidateQueries({
                 queryKey: ["users"]
             });
+
+            // router.navigate({ to: "/dashboard" });
         },
         onError: () => {
             toast({
-                title: "Failed to update user role",
-            });
+                title: "Failed to delete user",
+            })
         },
     });
 }

@@ -6,9 +6,9 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { useUpdateUserRole } from "@/hooks/use-updateUserRole";
 import ConfirmationForm from "./Confirmation-form";
 import { useState } from "react";
+import { useUpdateUserRole } from "@/hooks/users/use-updateUserRole";
 
 type User = {
     id: number;
