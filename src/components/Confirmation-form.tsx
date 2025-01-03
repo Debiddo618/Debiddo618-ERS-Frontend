@@ -22,7 +22,7 @@ export default function ConfirmationForm({ message, id, entity, handleCloseForm,
     } else if (entity === 'user') {
       deleteUser(id);
     }
-    handleCloseForm;
+    handleCloseForm();
   };
 
   return (

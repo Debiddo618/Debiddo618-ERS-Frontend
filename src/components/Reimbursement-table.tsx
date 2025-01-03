@@ -64,6 +64,10 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
         setSelected(reimbursement);
     }
 
+    const handleFormClose = () => {
+        setSelectedReimbId(null);
+    }
+
     return (
         <>
             {!selected && <div className="bg-zinc-50 shadow-md min-h-[40vh] mx-36 my-5 p-3">
@@ -158,7 +162,7 @@ export function ReimbursementTable({ userData }: ReimbursementTableProps) {
                                                     id={reimbursement.reimbId}
                                                     message={`Are you sure you want to delete this reimbursement?`}
                                                     entity={"reimbursement"}
-                                                    handleCloseForm={() => setSelectedReimbId(null)}
+                                                    handleCloseForm={handleFormClose}
                                                     user={null}
                                                     reimbursement={reimbursement}
                                                 />
